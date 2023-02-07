@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.hhg{
+    color: rgb(127, 91, 47);
+}

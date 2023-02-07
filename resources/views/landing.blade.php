@@ -51,20 +51,23 @@
               </nav>
 
               <div>
-                <img src="{{asset('images/default_image.jpg')}}" class="w-100 shadow-lg bg-body-tertiary">
+                <img src="{{asset('images/default_image.jpg')}}" class="w-100 shadow-lg bg-body-tertiary" height="420">
               </div>
               <div class="container">
 
-              
+               <div class="text-center mt-2">
+                <h2 class="fw_bold text-success">Meals of this Week</h2>
+               </div>
+
               <div class="container row mx-auto">
               @foreach ($meals as $meal)
                 <div class="col-lg-3 p-3 col-12">
                     <div class=" card">
                         <img src="{{asset('images/'.$meal->image)}}" class="card-img-top" with="100"  height="160">
                     <div class="card-body">
-                      <h5 class="card-title">{{$meal->name}}</h5>
-                      <p>Date : {{$meal->date}}</p>
-                      <p class="card-text">{{$meal->description}}</p>
+                      <h5 class="card-title fw-bold">{{$meal->name}}</h5>
+                      <p><span class="fw-bold">Date :</span> {{$meal->date}}</p>
+                      <p class="card-text text-success">{{$meal->description}}</p>
                     </div>
                   </div>
                 </div>

@@ -63,7 +63,7 @@ class MealsController extends Controller
     public function show($id)
     {
         $meals = Meals::find($id);
-        return view('/edit')->with('meals', $meals);;
+        return view('/edit')->with('meals', $meals);
     }
 
     /**
