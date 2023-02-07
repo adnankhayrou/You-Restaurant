@@ -14,7 +14,11 @@ class MealsController extends Controller
      */
     public function index()
     {
-        //
+        // echo "here";
+        $meals = Meals::all();
+        // dd($meals);
+        return view('dashboard')->with('meals', $meals);
+
     }
 
     /**
@@ -22,10 +26,14 @@ class MealsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexx()
     {
-        //
+       // echo "here";
+       $meals = Meals::paginate(4);
+       // dd($meals);
+       return view('landing')->with('meals', $meals);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +44,14 @@ class MealsController extends Controller
     public function store(Request $request)
     {
         //
+        $data = [
+            'name' => $request->input('name'),
+            'image' => $request->input('image'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
+        ];
+        Meals::create($data);
+        return redirect('/dashboard');
     }
 
     /**
@@ -44,9 +60,10 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function show(Meals $meals)
+    public function show($id)
     {
-        //
+        $meals = Meals::find($id);
+        return view('/edit')->with('meals', $meals);;
     }
 
     /**
@@ -67,9 +84,16 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meals $meals)
+    public function update(Request $request, $id)
     {
-        //
+        $data = [
+            'name' => $request->input('name'),
+            'image' => $request->input('image'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
+        ];
+        Meals::where('id', $id)->update($data);
+        return redirect('/dashboard');
     }
 
     /**
@@ -78,8 +102,10 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meals $meals)
+    public function destroy($id)
     {
-        //
+        $meals = Meals::find($id);
+        $meals->delete();
+        return redirect('/dashboard');
     }
 }

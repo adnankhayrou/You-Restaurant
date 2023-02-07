@@ -6,15 +6,15 @@
     </x-slot>
     
     <div class="row items-center">
-        <h1 class="col fw-bold ms-2 mt-3">All Meals</h1>
-        <button class="col-4 me-3 mt-3 btn btn-primary"><b>+ </b> Add A Meal</button>
+        <h1 class="col fw-bold ms-5 mt-5">All Meals</h1>
+        <button class="col-4 me-5 mt-5 btn btn-primary w-auto" href="#modal-meal" data-bs-toggle="modal"><b>+ </b> Add a Meal</button>
         </div>
     <div class="container pt-5 table-responsive">
-        {{-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"> --}}
+        <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> -->
+            <!-- <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"> -->
                 
 
-                <table class="table table-responsive">
+                <table class="table table-responsive bg-white rounded">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -27,46 +27,71 @@
                       </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $count = 1;
+                        @endphp
+                    @foreach ($meals as $meal)
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td><img class="rounded" src="{{asset('images/82263.jpg')}}" width="100" height="60"></td>
-                        <td>hbhcbjbdbdhhdbhch</td>
-                        <td>12/34/2023 14:12:46</td>
-                        <td><a href="" class="text-decoration-none text-primary fw-bold">edit</a></td>
-                        <td><a href="" class="text-decoration-none text-danger fw-bold">delete</a></td>
+                        <td>{{$count }}</td>
+                        <td>{{$meal->name}}</td>
+                        <td><img class="rounded" src="{{asset('images/'.$meal->image)}}" width="100" height="50"></td>
+                        <td><p class="text-truncate">{{$meal->description}}</p></td>
+                        <td>{{$meal->date}}</td>
+                        <td><a href="Edit/{{$meal->id}}" class="text-decoration-none text-primary fw-bold">edit</a></td>
+                        <td><a href="DeleteMeal/{{$meal->id}}" class="text-decoration-none text-danger fw-bold">delete</a></td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td><img class="rounded" src="{{asset('images/85305.jpg')}}" width="100" height="60"></td>
-                        <td>hbhcbjbdbdhhdbhch</td>
-                        <td>12/34/2023 14:12:46</td>
-                        <td><a href="" class="text-decoration-none text-primary fw-bold">edit</a></td>
-                        <td><a href="" class="text-decoration-none text-danger fw-bold">delete</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Bird</td>
-                        <td><img class="rounded" src="{{asset('images/265693.png')}}" width="100" height="60"></td>
-                        <td>hbhcbjbdbdhhdbhch</td>
-                        <td>12/34/2023 14:12:46</td>
-                        <td><a href="" class="text-decoration-none text-primary fw-bold">edit</a></td>
-                        <td><a href="" class="text-decoration-none text-danger fw-bold">delete</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>Bird</td>
-                        <td><img class="rounded" src="{{asset('images/521718.jpg')}}" width="100" height="60"></td>
-                        <td>hbhcbjbdbdhhdbhch</td>
-                        <td>12/34/2023 14:12:46</td>
-                        <td><a href="" class="text-decoration-none text-primary fw-bold">edit</a></td>
-                        <td><a href="" class="text-decoration-none text-danger fw-bold">delete</a></td>
-                      </tr>
+                      
+                       
+                      @php
+                        $count ++;
+                        @endphp
+                        @endforeach
                     </tbody>
-                  {{-- </table> --}}
+                 </table> 
                 
-            {{-- </div>
-        </div> --}}
-    </div>
+           </div>
+        <!-- </div> -->
+    <!-- </div> -->
+<!-- add meal form -->
+	<div class="modal fade" id="modal-meal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="SaveMeal" method="POST" id="form">
+                 @csrf
+					<div class="modal-header">
+						<h5 class="modal-title fw-bold">New Meal</h5>
+						<a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+					</div>
+					<div class="modal-body">
+			
+							<input type="hidden" name="id" >
+							<div class="mb-3">
+								<label class="form-label">Name</label>
+								<input type="text" name="name" class="form-control rounded" required/>
+							</div>
+
+                <div class="mb-3">
+                  <label for="image" class="col-form-label" id="image">Image</label>
+                  <input type="file" class="form-control border rounded" id="images" name="image" required>
+                </div>
+                
+							<div class="mb-0">
+								<label class="form-label">Description</label>
+								<textarea class="form-control border rounded" name="description" rows="7"></textarea>
+							</div>
+
+              <div class="mb-3">
+								<label class="form-label">Date</label>
+								<input type="date" name="date" class="form-control rounded" required/>
+							</div>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="/dashboard" class="btn btn-white border" >Cancel</a>
+						<button type="submit" class="btn btn-primary text-light bg-primary">Add Meal</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </x-app-layout>

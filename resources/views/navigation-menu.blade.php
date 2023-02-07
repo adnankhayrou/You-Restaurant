@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
-                        <h1 class="text-primary fs-1 ">You-res</h1>
+                        <h1 class="text-primary fs-1 ">You-Restau</h1>
                     </a>
                 </div>
 
