@@ -34,7 +34,7 @@
                       <tr>
                         <td>{{$count }}</td>
                         <td>{{$meal->name}}</td>
-                        <td><img class="rounded" src="{{asset('images/'.$meal->image)}}" width="100" height="50"></td>
+                        <td><img class="rounded" src="{{asset('/storage/'.$meal->image)}}" width="100" height="50"></td>
                         <td><p class="text-truncate">{{$meal->description}}</p></td>
                         <td>{{$meal->date}}</td>
                         <td><a href="Edit/{{$meal->id}}" class="text-decoration-none text-primary fw-bold">edit</a></td>
@@ -56,7 +56,7 @@
 	<div class="modal fade" id="modal-meal">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="SaveMeal" method="POST" id="form">
+				<form action="SaveMeal" method="POST" id="form" enctype="multipart/form-data">
                  @csrf
 					<div class="modal-header">
 						<h5 class="modal-title fw-bold">New Meal</h5>

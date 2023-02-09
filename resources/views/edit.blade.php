@@ -10,7 +10,7 @@
         </div>
     <!-- edit meal form -->
     <div class="container pt-3 w-50 bg-white rounded">
-        <form action="EditMeal/{{$meals->id}}" method="POST" id="form" class=" pb-2">
+        <form action="EditMeal/{{$meals->id}}" method="POST" id="form" class=" pb-2" enctype="multipart/form-data">
             @csrf
                
                <div class="modal-body">
@@ -20,7 +20,7 @@
                            <label class="form-label">Name</label>
                            <input type="text" name="name" class="form-control rounded" value="{{$meals->name}}" required/>
                        </div>
-
+                       <img class="rounded" src="{{asset('/storage/'.$meals->image)}}" width="100" height="50">
            <div class="mb-3">
              <label for="image" class="col-form-label" id="image">Image</label>
              <input type="file" class="form-control border rounded" id="images" name="image" required>

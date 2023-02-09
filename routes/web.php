@@ -13,29 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', function () {return view('landing');});
 
-Route::get('/', [MealsController::class, 'indexx']);
+Route::get('/', [MealsController::class, 'show']);
 
 Route::get('DeleteMeal/{id}', [MealsController::class, 'destroy']);
 
-Route::get('Edit/{id}', [MealsController::class, 'show']);
+Route::get('Edit/{id}', [MealsController::class, 'edit']);
 
 Route::post('SaveMeal', [MealsController::class, 'store']);
 
 Route::post('Edit/EditMeal/{id}', [MealsController::class, 'update']);
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
 
 Route::middleware([
     'auth:sanctum',

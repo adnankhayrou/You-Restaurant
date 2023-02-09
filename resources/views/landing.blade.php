@@ -4,9 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title>Dashboard</title>
+        <title>You Restaurant</title>
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,22 +22,26 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
-                background-color: rgb(243 244 246);
+                /* background-color: rgb(243, 244, 246); */
+                background-image: url(/images/wooden-floor-with-black-wall-product-background.jpg);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% 100%;
             }
         </style>
     </head>
     <body class="antialiased">
 
-            <nav class="navbar navbar-expand-lg bg-body-secondary   shadow-lg bg-body-tertiary rounded  fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong mb-2">
                 <div class="container-fluid">
                     <a href="{{ url('/') }}">
-                        <h1 class="ms-5 text-primary text-decoration-none fs-1">You-Restau</h1>
+                        <h1 class="text-success text-decoration-none fs-1">You-Restau</h1>
                     </a>
                     <div>
                     @if (Route::has('login'))
                 {{-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> --}}
                     @auth
-                    <button class="ms-2 btn border-success me-5 "><a href="{{ url('/dashboard') }}" class="text-success text-decoration-none fs-bold">Dashboard</a></button>
+                    <button class="ms-2 btn border-success me-2 "><a href="{{ url('/dashboard') }}" class="text-success text-decoration-none fs-bold">Dashboard</a></button>
                     @else
                     <button class="ms-2 btn border-success"><a href="{{ route('login') }}" class="text-success text-decoration-none fs-bold">Log in</a></button>
                        
@@ -45,37 +52,104 @@
                        
                     @endauth
                 </div>
-            @endif
+             @endif
                  
                 </div>
               </nav>
 
-              <div>
-                <img src="{{asset('images/default_image.jpg')}}" class="w-100 shadow-lg bg-body-tertiary" height="420">
+              <div class="container  text-center">
+                  {{-- <div class="col ">
+                      <h1>jfbjbdjkcnjedfherfuie efndcerufn iebnrfjernf jrnfcjerfn</h1>
+                    </div> --}}
+                    
+                    <div class="col">
+                        <img src="{{asset('images/track all meals of the week with you-restau.png')}}" class="w-100 h-50 border-bold rounded">
+                    </div>
               </div>
               <div class="container">
 
                <div class="text-center mt-2">
-                <h2 class="fw_bold text-success">Meals of this Week</h2>
+                <h1 class="fw_bold text-success mt-2 ">Meals of this Week</h1>
                </div>
 
               <div class="container row mx-auto">
               @foreach ($meals as $meal)
-                <div class="col-lg-3 p-3 col-12">
-                    <div class=" card">
-                        <img src="{{asset('images/'.$meal->image)}}" class="card-img-top" with="100"  height="160">
-                    <div class="card-body">
-                      <h5 class="card-title fw-bold">{{$meal->name}}</h5>
-                      <p><span class="fw-bold">Date :</span> {{$meal->date}}</p>
-                      <p class="card-text text-success">{{$meal->description}}</p>
-                    </div>
+                <div class="col-lg-3 p-3 col-12 " href="#modal-meal" data-bs-toggle="modal" onclick="showModel('{{$meal->name}}','{{$meal->description}}','{{$meal->image}}','{{$meal->date}}')">
+                    <div class="card border-dark bg-dark  shadow-lg  rounded-pill">
+                      <img src="{{asset('/storage/'.$meal->image)}}" class="card-img-top" with="100"  height="200">
+                    <div class="card-body text-center">
+                      <h5 class="card-title fw-bold text-light">{{$meal->name}}</h5>
+                      <p class="mb-2 items-center text-light"><i class="bi bi-geo-alt-fill"></i> : Youcode, Restaurant</p>
+                      <p class="card-text text-success"># {{$meal->description}}</p>
+                      <hr class="my-1" />
+                      <p class="fw-bold text-light">Available on :</p>
+                      <p class="text-light"><span class="fw-bold text-light">Date :</span> {{$meal->date}}</p>
+                    </div>    
                   </div>
                 </div>
               @endforeach
                   
-              </div>
+              {{-- </div>
               {{$meals->links('pagination::bootstrap-4')}}
-            </div>
+            </div> --}}
+            {{-- <button class="col-4 me-5 mt-5 btn btn-primary w-auto" href="#modal-meal" data-bs-toggle="modal"><b>+ </b> Add a Meal</button> --}}
 
+            <!-- add meal form -->
+	<div class="modal fade " id="modal-meal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title fw-bold" id="name"></h5>
+						<a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+					</div>
+					<div class="modal-body">
+                        <div class="mb-3" id="image-m">
+                            {{-- <img src="" class="card-img-top rounded" with="100"  height="160" id="image"> --}}
+                        </div>
+                
+                        <div class="mb-0">
+                            <p class="card-text text-success" id="description"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <hr class="my-1" />
+                            <p class="" id="date"></p>
+                        </div>
+						
+					</div>
+			</div>
+		</div>
+	</div>
+	{{-- <div class="modal fade " id="modal-meal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title fw-bold">{{$meal->name}}</h5>
+						<a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+					</div>
+					<div class="modal-body">
+                        <div class="mb-3">
+                            <img src="{{asset('/storage/'.$meal->image)}}" class="card-img-top rounded" with="100"  height="160">
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="mb-2 items-center"><i class="bi bi-geo-alt-fill mb-1"></i> : Youcode, Restaurant</p>
+                        </div>
+                
+                        <div class="mb-0">
+                            <p class="card-text text-success"># {{$meal->description}}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <hr class="my-1" />
+                            <p class="fw-bold">Available on :</p>
+                            <p class=""><span class="fw-bold">Date :</span> {{$meal->date}}</p>
+                        </div>
+						
+					</div>
+			</div>
+		</div>
+	</div> --}}
+<script src="{{ asset('js/script.js') }}"></script>
     </body>
 </html>

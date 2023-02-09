@@ -29,8 +29,8 @@ class MealsController extends Controller
     public function indexx()
     {
        // echo "here";
-       $meals = Meals::paginate(4);
-       // dd($meals);
+    //    $meals = Meals::paginate(4);
+       $meals = Meals::all();
        return view('landing')->with('meals', $meals);
     }
 
@@ -46,7 +46,7 @@ class MealsController extends Controller
         //
         $data = [
             'name' => $request->input('name'),
-            'image' => $request->input('image'),
+            'image' => $request->file('image')->store('image','public'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
         ];
@@ -60,10 +60,10 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $meals = Meals::find($id);
-        return view('/edit')->with('meals', $meals);
+        $meals = Meals::all();
+        return view('landing')->with('meals', $meals);
     }
 
     /**
@@ -72,9 +72,10 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function edit(Meals $meals)
+    public function edit($id)
     {
-        //
+        $meals = Meals::find($id);
+        return view('/edit')->with('meals', $meals);
     }
 
     /**
@@ -88,7 +89,7 @@ class MealsController extends Controller
     {
         $data = [
             'name' => $request->input('name'),
-            'image' => $request->input('image'),
+            'image' => $request->file('image')->store('image','public'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
         ];
