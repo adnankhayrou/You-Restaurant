@@ -74,12 +74,12 @@
 
               <div class="container row mx-auto">
               @foreach ($meals as $meal)
-                <div class="col-lg-3 p-3 col-12 " href="#modal-meal" data-bs-toggle="modal" onclick="showModel('{{$meal->name}}','{{$meal->description}}','{{$meal->image}}','{{$meal->date}}')">
+                <div class="col-md-4 col-lg-3 p-3 col-12" href="#modal-meal" data-bs-toggle="modal" onclick="showModel('{{$meal->name}}','{{$meal->description}}','{{$meal->image}}','{{$meal->date}}')">
                     <div class="card border-dark bg-dark  shadow-lg  rounded-pill">
                       <img src="{{asset('/storage/'.$meal->image)}}" class="card-img-top" with="100"  height="200">
-                    <div class="card-body text-center">
+                    <div class="card-body text-center d-none">
                       <h5 class="card-title fw-bold text-light">{{$meal->name}}</h5>
-                      <p class="mb-2 items-center text-light"><i class="bi bi-geo-alt-fill"></i> : Youcode, Restaurant</p>
+                      <p class="mb-2 items-center text-light" ><i class="bi bi-geo-alt-fill"></i> : Youcode, Restaurant</p>
                       <p class="card-text text-success"># {{$meal->description}}</p>
                       <hr class="my-1" />
                       <p class="fw-bold text-light">Available on :</p>
@@ -100,19 +100,21 @@
 			<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title fw-bold" id="name"></h5>
-						<a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+						<a href="#" class="btn-close" data-bs-dismiss="modal" ></a>
 					</div>
+                    
 					<div class="modal-body">
                         <div class="mb-3" id="image-m">
-                            {{-- <img src="" class="card-img-top rounded" with="100"  height="160" id="image"> --}}
                         </div>
+                        <p class="mb-2 items-center text-dark" ><i class="bi bi-geo-alt-fill"></i> : Youcode, Restaurant</p>
+
                 
                         <div class="mb-0">
                             <p class="card-text text-success" id="description"></p>
                         </div>
-
+                        <hr class="my-1" />
+                        <p class="fw-bold text-dark">Available on :</p>
                         <div class="mb-3">
-                            <hr class="my-1" />
                             <p class="" id="date"></p>
                         </div>
 						

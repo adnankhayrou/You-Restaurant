@@ -26,13 +26,13 @@ class MealsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexx()
-    {
+    // public function indexx()
+    // {
        // echo "here";
     //    $meals = Meals::paginate(4);
-       $meals = Meals::all();
-       return view('landing')->with('meals', $meals);
-    }
+    //    $meals = Meals::all();
+    //    return view('landing')->with('meals', $meals);
+    // }
 
 
     /**
@@ -43,7 +43,13 @@ class MealsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:11000',
+            'description' => 'required',
+            'date' => 'required',
+        ]);
+
         $data = [
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('image','public'),
@@ -86,7 +92,14 @@ class MealsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:11000',
+            'description' => 'required',
+            'date' => 'required',
+        ]);
+        
         $data = [
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('image','public'),
