@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreMealsReques;
 use App\Models\Meals;
 use Illuminate\Http\Request;
 
@@ -14,11 +14,9 @@ class MealsController extends Controller
      */
     public function index()
     {
-        // echo "here";
         $meals = Meals::all();
         // dd($meals);
         return view('dashboard')->with('meals', $meals);
-
     }
 
     /**
@@ -41,14 +39,8 @@ class MealsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMealsReques $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:11000',
-            'description' => 'required',
-            'date' => 'required',
-        ]);
 
         $data = [
             'name' => $request->input('name'),
@@ -91,15 +83,8 @@ class MealsController extends Controller
      * @param  \App\Models\Meals  $meals
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {   
-        $request->validate([
-            'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:11000',
-            'description' => 'required',
-            'date' => 'required',
-        ]);
-        
+    public function update(StoreMealsReques $request, $id)
+    {    
         $data = [
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('image','public'),

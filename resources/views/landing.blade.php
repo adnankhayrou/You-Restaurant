@@ -80,7 +80,7 @@
                     <div class="card-body text-center d-none">
                       <h5 class="card-title fw-bold text-light">{{$meal->name}}</h5>
                       <p class="mb-2 items-center text-light" ><i class="bi bi-geo-alt-fill"></i> : Youcode, Restaurant</p>
-                      <p class="card-text text-success"># {{$meal->description}}</p>
+                      <p class="card-text text-success">{{$meal->description}}</p>
                       <hr class="my-1" />
                       <p class="fw-bold text-light">Available on :</p>
                       <p class="text-light"><span class="fw-bold text-light">Date :</span> {{$meal->date}}</p>
@@ -112,9 +112,9 @@
                         <div class="mb-0">
                             <p class="card-text text-success" id="description"></p>
                         </div>
-                        <hr class="my-1" />
-                        <p class="fw-bold text-dark">Available on :</p>
-                        <div class="mb-3">
+                        <hr class="my-1 my-4" />
+                        <p class="fw-bold text-dark mb-0">Available on :</p>
+                        <div class="">
                             <p class="" id="date"></p>
                         </div>
 						

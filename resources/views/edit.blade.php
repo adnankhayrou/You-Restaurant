@@ -15,33 +15,51 @@
                
                <div class="modal-body">
        
-                       <input type="hidden" name="id" >
-                       <div class="mb-3">
-                           <label class="form-label">Name</label>
-                           <input type="text" name="name" class="form-control rounded" value="{{$meals->name}}" required/>
-                       </div>
-                       <img class="rounded" src="{{asset('/storage/'.$meals->image)}}" width="100" height="50">
+            <input type="hidden" name="id" >
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control rounded" value="{{$meals->name}}" required/>
+                <small class="text-danger">
+                    @error('name')
+                    {{ $message }}
+                @enderror</small>
+            </div>
+
+            <img class="rounded" src="{{asset('/storage/'.$meals->image)}}" width="100" height="50">
+
            <div class="mb-3">
              <label for="image" class="col-form-label" id="image">Image</label>
              <input type="file" class="form-control border rounded" id="images" name="image" required>
+             <small class="text-danger">
+                @error('image')
+                {{ $message }}
+            @enderror</small>
            </div>
            
-                       <div class="mb-0">
-                           <label class="form-label">Description</label>
-                           <textarea class="form-control border rounded" name="description" rows="7" >{{$meals->description}}</textarea>
-                       </div>
+            <div class="mb-0">
+                <label class="form-label">Description</label>
+                <textarea class="form-control border rounded" name="description" rows="7" >{{$meals->description}}</textarea>
+                <small class="text-danger">
+                    @error('description')
+                    {{ $message }}
+                @enderror</small>
+            </div>
 
-         <div class="mb-3">
-                           <label class="form-label">Date</label>
-                           <input type="date" name="date" class="form-control rounded" value="{{$meals->date}}" required/>
-                       </div>
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" name="date" class="form-control rounded" value="{{$meals->date}}" required/>
+                <small class="text-danger">
+                    @error('date')
+                    {{ $message }}
+                @enderror</small>
+            </div>
                    
-               </div>
-               <div class="modal-footer">
-                   <a href="/dashboard" class="btn btn-white border" >Cancel</a>
-                   <button type="submit" class="btn btn-primary ms-2 text-light bg-primary">Save Change</button>
-               </div>
-           </form>   
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard" class="btn btn-white border" >Cancel</a>
+                <button type="submit" class="btn btn-primary ms-2 text-light bg-primary">Save Change</button>
+            </div>
+         </form>   
 
            </div>
         </div>

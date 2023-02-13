@@ -36,7 +36,7 @@
                         <td>{{$count}}</td>
                         <td>{{$meal->name}}</td>
                         <td><img class="rounded" src="{{asset('/storage/'.$meal->image)}}" width="100" height="60"></td>
-                        <td><p class="text-truncate">{{$meal->description}}</p></td>
+                        <td><span class="d-inline-block text-truncate" style="max-width: 150px;">{{$meal->description}}</span></td>
                         <td>{{$meal->date}}</td>
                         <td><a href="Edit/{{$meal->id}}" class="text-decoration-none text-primary fw-bold">edit</a></td>
                         <td><a href="DeleteMeal/{{$meal->id}}" class="text-decoration-none text-danger fw-bold">delete</a></td>
@@ -69,41 +69,41 @@
 							<div class="mb-3">
 								<label class="form-label">Name</label>
 								<input type="text" name="name" class="form-control rounded" />
+                                <small class="text-danger">
+                                    @error('name')
+                                    {{ $message }}
+                                @enderror
+                               </small>
 							</div>
-                            <small class="text-danger">
-                                @error('name')
-                                {{ $message }}
-                            @enderror
-                           </small>
 
                             <div class="mb-3">
                                 <label for="image" class="col-form-label" id="image">Image</label>
                                 <input type="file" class="form-control border rounded" id="images" name="image" >
+                                <small class="text-danger"> 
+                                    @error('image')
+                                    {{ $message }}
+                                @enderror
+                                </small>
                             </div>
-                            <small class="text-danger"> 
-                                @error('image')
-                                {{ $message }}
-                            @enderror
-                            </small>
                 
 							<div class="mb-0">
 								<label class="form-label">Description</label>
 								<textarea class="form-control border rounded" name="description" rows="7"></textarea>
+                                <small class="text-danger">
+                                    @error('description')
+                                    {{ $message }}
+                                @enderror
+                                </small>
 							</div>
-                            <small class="text-danger">
-                                @error('description')
-                                {{ $message }}
-                            @enderror
-                            </small>
 
                             <div class="mb-3">
 								<label class="form-label">Date</label>
 								<input type="date" name="date" class="form-control rounded" />
+                                <small class="text-danger">
+                                    @error('date')
+                                    {{ $message }}
+                                @enderror</small>
 							</div>
-                            <small class="text-danger">
-                                @error('date')
-                                {{ $message }}
-                            @enderror</small>
 						
 					</div>
 					<div class="modal-footer">
